@@ -5,12 +5,21 @@ const loadData = () => {
         .then(res => res.json())
         .then(data => {
             
-            showData(data)
+            showData(data.slice(0,9))
         })
+}
+const showAllDataTogether=countries=>{
+    fetch('https://restcountries.com/v3.1/all')
+    .then(res => res.json())
+    .then(data => {
+        
+        showData(data)
+    })
 }
 const showData = countries => {
     const countryContainer = document.getElementById('countries-info');
-    countries.slice(0, 5).forEach((country) => {
+    countryContainer.innerHTML='';
+    countries.forEach((country) => {
         console.log(country);
         const div = document.createElement('div');
         div.innerHTML = `
@@ -31,12 +40,6 @@ const showData = countries => {
     })
 
 }
-const ShowDetails = (id) => {
-    const URL = `https://restcountries.com/v3.1/alpha/${id}`;
-    fetch(URL)
-    .then(res=>res.json())
-    .then(data=>console.log(data))
 
-}
 // https://restcountries.com/v3.1/alpha/${id}
 loadData();
