@@ -1,5 +1,5 @@
 // console.log("sports")
-const searchAllData = () => {
+const searchAllData = (id) => {
   const inputElement = document.getElementById("search-value");
   document.getElementById('single-player-details').innerHTML="";
   document.getElementById('male').classList.add('d-none');
@@ -7,7 +7,10 @@ const searchAllData = () => {
   const inputBoxValue=inputElement.value;
   document.getElementById('spinner').classList.remove('d-none');
   // console.log(inputBoxValue);
-  const URL = (`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${inputBoxValue}`);
+
+  const searchId=id || inputBoxValue;
+
+  const URL = (`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${searchId}`);
 
   fetch(URL)
     .then(res => res.json())
@@ -81,3 +84,4 @@ const showSinglePlayer=(data)=>{
   `
   container.appendChild(div);
 }
+searchAllData("messi");
